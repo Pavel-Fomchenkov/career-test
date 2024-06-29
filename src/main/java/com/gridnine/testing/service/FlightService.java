@@ -14,5 +14,9 @@ public interface FlightService {
 
     List<Flight> lessOrEqualTimeWaitingFlights(List<Flight> flights, int hours);
 
+    List<Flight> notVeryLongFlights(List<Flight> flights);
+
+    List<Flight> progressivelyOrderedFlights(List<Flight> flights);
+
     void printFlights(List<Flight> flights);
 }

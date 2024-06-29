@@ -83,4 +83,20 @@ class FlightServiceImplTest {
         );
     }
 
+    @Test
+    public void shouldExcludeFlightsWithSegmentsLongerThen15Hours() {
+        List<Flight> expected = out.notVeryLongFlights(flights);
+        assertTrue(expected.size() == 3 &&
+                expected.containsAll(List.of(flight1, flight4, flight6))
+        );
+    }
+
+    @Test
+    public void shouldExcludeFlightsHavingSegmentsThatNotArriveBeforeNextDeparture() {
+        List<Flight> expected = out.progressivelyOrderedFlights(flights);
+        assertTrue(expected.size() == 6 &&
+                expected.containsAll(List.of(flight1, flight3, flight4, flight5, flight6, flight7))
+        );
+    }
+
 }

@@ -59,6 +59,33 @@ public class FlightServiceImpl implements FlightService {
                     return true;
                 }).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Flight> notVeryLongFlights(List<Flight> flights) {
+        return flights.stream()
+                .filter(flight ->
+                        flight.getSegments().stream()
+                                .noneMatch(segment -> ChronoUnit.HOURS.between(segment.getDepartureDate(), segment.getArrivalDate()) > 15)
+                ).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Flight> progressivelyOrderedFlights(List<Flight> flights) {
+        return flights.stream()
+                .filter(flight -> {
+                    LocalDateTime arrival = null;
+                    for (Segment segment : flight.getSegments()) {
+                        if (arrival != null) {
+                            if (segment.getDepartureDate().isBefore(arrival)) {
+                                return false;
+                            }
+                        }
+                        arrival = segment.getArrivalDate();
+                    }
+                    return true;
+                }).collect(Collectors.toList());
+    }
+
     @Override
     public void printFlights(List<Flight> flights) {
         for (Flight flight : flights) {
