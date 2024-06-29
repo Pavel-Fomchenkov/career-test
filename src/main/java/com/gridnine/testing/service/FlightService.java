@@ -19,4 +19,6 @@ public interface FlightService {
     List<Flight> progressivelyOrderedFlights(List<Flight> flights);
 
     void printFlights(List<Flight> flights);
+
+    FlightServiceImpl.FlightFilterBuilder filterBuilder(List<Flight> flights);
 }

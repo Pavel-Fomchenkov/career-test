@@ -99,4 +99,14 @@ class FlightServiceImplTest {
         );
     }
 
+    @Test
+    public void testFilterBuilder() {
+        List<Flight> expected = out.filterBuilder(flights).futureDepartureFlights().departureBeforeArrivalFlights()
+                .notVeryLongFlights().lessOrEqualTimeWaitingFlights(2).progressivelyOrderedFlights()
+                .build();
+        assertTrue(expected.size() == 1 &&
+                expected.contains(flight6)
+        );
+    }
+
 }

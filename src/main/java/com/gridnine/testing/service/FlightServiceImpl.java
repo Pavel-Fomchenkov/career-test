@@ -92,4 +92,48 @@ public class FlightServiceImpl implements FlightService {
             System.out.println(flight);
         }
     }
+
+    @Override
+    public FlightFilterBuilder filterBuilder(List<Flight> flights) {
+        return new FlightFilterBuilder(flights);
+    }
+
+    public static class FlightFilterBuilder {
+        private List<Flight> flights;
+        FlightService flightService = new FlightServiceImpl();
+
+        public FlightFilterBuilder(List<Flight> flights) {
+            this.flights = flights;
+        }
+
+
+        public FlightFilterBuilder futureDepartureFlights() {
+            this.flights = flightService.futureDepartureFlights(this.flights);
+            return this;
+        }
+
+        public FlightFilterBuilder departureBeforeArrivalFlights() {
+            this.flights = flightService.departureBeforeArrivalFlights(this.flights);
+            return this;
+        }
+
+        public FlightFilterBuilder lessOrEqualTimeWaitingFlights(int hours) {
+            this.flights = flightService.lessOrEqualTimeWaitingFlights(this.flights, hours);
+            return this;
+        }
+
+        public FlightFilterBuilder progressivelyOrderedFlights() {
+            this.flights = flightService.progressivelyOrderedFlights(this.flights);
+            return this;
+        }
+
+        public FlightFilterBuilder notVeryLongFlights() {
+            this.flights = flightService.notVeryLongFlights(this.flights);
+            return this;
+        }
+
+        public List<Flight> build() {
+            return this.flights;
+        }
+    }
 }

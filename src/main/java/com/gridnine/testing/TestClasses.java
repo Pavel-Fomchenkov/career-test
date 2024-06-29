@@ -1,17 +1,12 @@
 package com.gridnine.testing;
 
 import com.gridnine.testing.model.Flight;
-import com.gridnine.testing.model.Segment;
 import com.gridnine.testing.service.FlightService;
 import com.gridnine.testing.service.FlightServiceImpl;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Factory class to get sample list of flights.
